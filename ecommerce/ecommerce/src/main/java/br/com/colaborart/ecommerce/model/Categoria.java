@@ -17,7 +17,7 @@ public class Categoria {
 	private long idCategoria;
 
 	@NotBlank
-	@Size(min = 3, max = 50)
+	@Size(min = 3, max = 50) // primeiroo comentario do codigo que nao faz sentindo ainda
 	private String tipoProduto;
 
 	@NotBlank
