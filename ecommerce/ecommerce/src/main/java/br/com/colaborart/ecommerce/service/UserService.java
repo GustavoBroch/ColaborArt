@@ -12,6 +12,7 @@ import br.com.colaborart.ecommerce.model.Usuario;
 import br.com.colaborart.ecommerce.model.UsuarioLogin;
 import br.com.colaborart.ecommerce.repository.UsuarioRepository;
 
+@Service
 public class UserService {
 
 	@Autowired

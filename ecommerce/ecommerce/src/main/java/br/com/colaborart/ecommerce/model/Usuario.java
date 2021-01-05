@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -16,7 +17,7 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idUsuario;
 
-	@NotBlank
+	@NotNull
 	@Size(min = 3, max = 255)
 	private String nomeCompleto;
 
@@ -25,7 +26,7 @@ public class Usuario {
 	private String email;
 
 	@NotBlank
-	@Size(min = 6, max = 100)
+	@Size(min = 6, max = 255)
 	private String senha;
 
 	public long getIdUsuario() {
