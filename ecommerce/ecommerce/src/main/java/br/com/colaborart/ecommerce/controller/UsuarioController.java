@@ -1,6 +1,7 @@
 package br.com.colaborart.ecommerce.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.colaborart.ecommerce.model.Usuario;
+import br.com.colaborart.ecommerce.model.UsuarioLogin;
 import br.com.colaborart.ecommerce.repository.UsuarioRepository;
+import br.com.colaborart.ecommerce.service.UserService;
 
 @RestController
 @RequestMapping("/usuario")
@@ -24,31 +27,46 @@ import br.com.colaborart.ecommerce.repository.UsuarioRepository;
 public class UsuarioController {
 
 	@Autowired
-	private UsuarioRepository repositorio;
+	private UserService userService;
 
-	@GetMapping()
-	public ResponseEntity<List<Usuario>> buscarTodosUsuarios() {
-		return ResponseEntity.ok(repositorio.findAll());
+	@PostMapping("/logar")
+	public ResponseEntity<UsuarioLogin> Autentication(@RequestBody Optional<UsuarioLogin> usuario) {
+		return userService.Logar(usuario).map(resp -> ResponseEntity.ok(resp))
+				.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
 	}
 
-	@GetMapping("/{id}")
-	public ResponseEntity<Usuario> buscarUsuarioPorId(@PathVariable long id) {
-		return repositorio.findById(id).map(resposta -> ResponseEntity.ok(resposta))
-				.orElse(ResponseEntity.notFound().build());
+	@PostMapping("/cadastrar")
+	public ResponseEntity<Usuario> Post(@RequestBody Usuario usuario) {
+
+		Usuario user = userService.CadastrarUsuario(usuario);
+
+		if (user == null) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		}
+		return ResponseEntity.status(HttpStatus.CREATED).body(user);
 	}
 
-	@PostMapping()
-	public ResponseEntity<Usuario> inserirUsuario(@RequestBody Usuario usuario) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(repositorio.save(usuario));
-	}
+	/*
+	 * @Autowired private UsuarioRepository repositorio;
+	 * 
+	 * @GetMapping() public ResponseEntity<List<Usuario>> buscarTodosUsuarios() {
+	 * return ResponseEntity.ok(repositorio.findAll()); }
+	 * 
+	 * @GetMapping("/{id}") public ResponseEntity<Usuario>
+	 * buscarUsuarioPorId(@PathVariable long id) { return
+	 * repositorio.findById(id).map(resposta -> ResponseEntity.ok(resposta))
+	 * .orElse(ResponseEntity.notFound().build()); }
+	 * 
+	 * @PostMapping() public ResponseEntity<Usuario> inserirUsuario(@RequestBody
+	 * Usuario usuario) { return
+	 * ResponseEntity.status(HttpStatus.CREATED).body(repositorio.save(usuario)); }
+	 * 
+	 * @PutMapping() public ResponseEntity<Usuario> atualizarUsuario(@RequestBody
+	 * Usuario usuario){ return
+	 * ResponseEntity.status(HttpStatus.OK).body(repositorio.save(usuario)); }
+	 * 
+	 * @DeleteMapping("/{id}") public void deleteUsuario(@PathVariable long id) {
+	 * repositorio.deleteById(id); }
+	 */
 
-	@PutMapping()
-	public ResponseEntity<Usuario> atualizarUsuario(@RequestBody Usuario usuario){
-		return ResponseEntity.status(HttpStatus.OK).body(repositorio.save(usuario));
-	}
-
-	@DeleteMapping("/{id}")
-	public void deleteUsuario(@PathVariable long id) {
-		repositorio.deleteById(id);
-	}
 }
