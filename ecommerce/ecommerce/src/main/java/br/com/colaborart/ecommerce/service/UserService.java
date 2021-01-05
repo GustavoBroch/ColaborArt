@@ -41,7 +41,7 @@ public class UserService {
 
 				user.get().setToken(authHeader);
 				user.get().setEmail(usuario.get().getEmail());
-
+				user.get().setNomeCompleto(usuario.get().getNomeCompleto());
 				return user;
 			}
 		}

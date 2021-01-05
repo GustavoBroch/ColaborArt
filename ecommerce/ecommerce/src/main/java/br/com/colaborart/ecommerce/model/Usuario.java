@@ -37,12 +37,12 @@ public class Usuario {
 		this.idUsuario = idUsuario;
 	}
 
-	public String getNome_completo() {
+	public String getNomeCompleto() {
 		return nomeCompleto;
 	}
 
-	public void setNome_completo(String nome_completo) {
-		this.nomeCompleto = nome_completo;
+	public void setNomeCompleto(String nomeCompleto) {
+		this.nomeCompleto = nomeCompleto;
 	}
 
 	public String getEmail() {
