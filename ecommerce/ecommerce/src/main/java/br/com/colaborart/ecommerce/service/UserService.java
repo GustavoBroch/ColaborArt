@@ -20,14 +20,20 @@ public class UserService {
 
 	public Usuario CadastrarUsuario(Usuario usuario) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		
 		Optional<Usuario> usuarioPresente = userRepository.findByEmail(usuario.getEmail());
+		
 		if (usuarioPresente.isPresent()) {
-
 			return null;
 		}
-		String senhaEncoder = encoder.encode(usuario.getSenha());
-		usuario.setSenha(senhaEncoder);
-		return userRepository.save(usuario);
+		else if(usuario.getSenha().length() < 6) {
+			return null;
+		}
+		else {
+			String senhaEncoder = encoder.encode(usuario.getSenha());
+			usuario.setSenha(senhaEncoder);
+			return userRepository.save(usuario);
+		}
 	}
 
 	public Optional<UsuarioLogin> Logar(Optional<UsuarioLogin> user) {
