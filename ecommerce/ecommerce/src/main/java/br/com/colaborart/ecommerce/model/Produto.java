@@ -13,6 +13,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.URL;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -42,12 +44,16 @@ public class Produto {
 		@Min(0)
 		private int estoque;
 		
-		@NotBlank
+		@URL
 		private String urlProduto;
 		
 		@ManyToOne
 		@JsonIgnoreProperties("produto")
 		private Categoria categoria;
+		
+		@ManyToOne
+		@JsonIgnoreProperties("produto")
+		private Usuario usuario;
 		
 		@NotBlank
 		@Size(min =3, max = 70)
@@ -125,5 +131,14 @@ public class Produto {
 		public void setNome(String nome) {
 			this.nome = nome;
 		}
-						
+
+		public Usuario getUsuario() {
+			return usuario;
+		}
+
+		public void setUsuario(Usuario usuario) {
+			this.usuario = usuario;
+		}
+		
+		
 }

@@ -26,9 +26,6 @@ public class UserService {
 		if (usuarioPresente.isPresent()) {
 			return null;
 		}
-		else if(usuario.getSenha().length() < 6) {
-			return null;
-		}
 		else {
 			String senhaEncoder = encoder.encode(usuario.getSenha());
 			usuario.setSenha(senhaEncoder);
@@ -46,8 +43,14 @@ public class UserService {
 				String authHeader = "Basic " + new String(encodedAuth);
 
 				user.get().setToken(authHeader);
+				user.get().setIdUserLogin(usuario.get().getIdUsuario());
 				user.get().setEmail(usuario.get().getEmail());
 				user.get().setNomeCompleto(usuario.get().getNomeCompleto());
+				user.get().setFoto(usuario.get().getFoto());
+				user.get().setTipo(usuario.get().getTipo());
+				user.get().setCpf(usuario.get().getCpf());
+				user.get().setCep(usuario.get().getCep());
+				
 				return user;
 			}
 		}

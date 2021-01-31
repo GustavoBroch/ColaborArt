@@ -1,9 +1,9 @@
 package br.com.colaborart.ecommerce.model;
 
-import com.sun.istack.NotNull;
-
 public class UsuarioLogin {
 
+	private long idUserLogin; 
+	
 	private String nomeCompleto;
 
 	private String email;
@@ -11,6 +11,15 @@ public class UsuarioLogin {
 	private String senha;
 
 	private String token;
+	
+	private String foto;
+	
+	private String tipo;
+	
+	private String cpf;
+		
+	private int cep;
+	
 
 	public String getNomeCompleto() {
 		return nomeCompleto;
@@ -44,4 +53,45 @@ public class UsuarioLogin {
 		this.token = token;
 	}
 
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public long getIdUserLogin() {
+		return idUserLogin;
+	}
+
+	public void setIdUserLogin(long idUserLogin) {
+		this.idUserLogin = idUserLogin;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public int getCep() {
+		return cep;
+	}
+
+	public void setCep(int cep) {
+		this.cep = cep;
+	}
+
+	
 }

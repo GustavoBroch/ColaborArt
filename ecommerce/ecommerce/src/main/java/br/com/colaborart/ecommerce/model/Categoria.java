@@ -34,7 +34,7 @@ public class Categoria {
 	@Size(min = 5, max = 200)
 	private String descricaoCategoria;
 	
-	@OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "categoria", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("categoria")
 	private List<Produto> produto;
 
@@ -70,5 +70,7 @@ public class Categoria {
 	public void setProduto(List<Produto> produto) {
 		this.produto = produto;
 	}
+	
+	
 	
 }
