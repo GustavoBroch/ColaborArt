@@ -1,7 +1,6 @@
 package br.com.colaborart.ecommerce.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -23,7 +22,7 @@ import br.com.colaborart.ecommerce.repository.ProdutoRepository;
 
 @RestController
 @RequestMapping("/produto")
-@CrossOrigin(value = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ProdutoController {
 
 	@Autowired
@@ -44,21 +43,21 @@ public class ProdutoController {
 	public ResponseEntity<List<Produto>> buscarProduto(@PathVariable String nome) {
 		return ResponseEntity.ok(repositorio.findAllByNomeContainingIgnoreCase(nome));
 	}
-
+	
 	@PostMapping()
 	public ResponseEntity<Produto> inserirProduto(@Valid @RequestBody Produto amostra) {
-		Optional<Produto> produto = repositorio.findByNomeIgnoreCaseAndTamanhoIgnoreCase(amostra.getNome(),
+		/*Optional<Produto> produto = repositorio.findByNomeIgnoreCaseAndTamanhoIgnoreCase(amostra.getNome(),
 				amostra.getTamanho());
 
 		if (produto.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.CREATED).body(repositorio.save(amostra));
-		}
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		}*/
+		return ResponseEntity.status(HttpStatus.CREATED).body(repositorio.save(amostra));
 	}
 
 	@PutMapping()
 	public ResponseEntity<Produto> atualizarProduto(@RequestBody Produto amostra) {
-		Optional<Produto> produtoId = repositorio.findById(amostra.getIdProduto());
+		/*Optional<Produto> produtoId = repositorio.findById(amostra.getIdProduto());
 		if (produtoId.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}
@@ -69,6 +68,8 @@ public class ProdutoController {
 			return ResponseEntity.status(HttpStatus.OK).body(repositorio.save(amostra));
 		}
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		*/
+		return ResponseEntity.status(HttpStatus.OK).body(repositorio.save(amostra));
 	}
 
 	@DeleteMapping("/{id}")

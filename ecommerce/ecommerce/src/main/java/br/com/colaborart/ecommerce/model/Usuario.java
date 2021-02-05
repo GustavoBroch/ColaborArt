@@ -40,15 +40,16 @@ public class Usuario {
 	@Size(max = 255)
 	private String senha;
 	
-	@CPF
+	@NotNull
 	private String cpf;
 		
-	@URL
+	@NotNull
 	public String foto;
 	
 	@NotBlank
 	public String tipo;
 	
+	@NotNull
 	public int cep;
 	
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)

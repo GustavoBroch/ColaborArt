@@ -13,8 +13,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.URL;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -44,7 +42,7 @@ public class Produto {
 		@Min(0)
 		private int estoque;
 		
-		@URL
+		@NotNull
 		private String urlProduto;
 		
 		@ManyToOne

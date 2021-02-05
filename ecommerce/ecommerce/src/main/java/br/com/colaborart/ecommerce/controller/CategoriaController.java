@@ -1,7 +1,6 @@
 package br.com.colaborart.ecommerce.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +20,7 @@ import br.com.colaborart.ecommerce.repository.CategoriaRepository;
 
 @RestController
 @RequestMapping("/categoria")
-@CrossOrigin(value = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CategoriaController {
 
 	@Autowired
@@ -45,19 +44,20 @@ public class CategoriaController {
 
 	@PostMapping()
 	public ResponseEntity<Categoria> inserirCategoria(@RequestBody Categoria categoria) {
-
+		/*
 		Optional<Categoria> categoriaNome = repositorio.findByTipoProdutoIgnoreCase(categoria.getTipoProduto());
 
 		if (categoriaNome.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.CREATED).body(repositorio.save(categoria));
 		}
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-
+			*/
+		return ResponseEntity.status(HttpStatus.CREATED).body(repositorio.save(categoria));
 	}
 
 	@PutMapping()
 	public ResponseEntity<Categoria> atualizarCategoria(@RequestBody Categoria categoria) {
-		Optional<Categoria> categoriaId = repositorio.findById(categoria.getIdCategoria());
+		/*Optional<Categoria> categoriaId = repositorio.findById(categoria.getIdCategoria());
 
 		if (categoriaId.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -69,6 +69,8 @@ public class CategoriaController {
 			return ResponseEntity.status(HttpStatus.OK).body(repositorio.save(categoria));
 		}
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		*/
+		return ResponseEntity.status(HttpStatus.OK).body(repositorio.save(categoria));
 	}
 
 	@DeleteMapping("/{id}")
