@@ -1,6 +1,7 @@
 package br.com.colaborart.ecommerce.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -43,6 +44,7 @@ public class ProdutoController {
 	public ResponseEntity<List<Produto>> buscarProduto(@PathVariable String nome) {
 		return ResponseEntity.ok(repositorio.findAllByNomeContainingIgnoreCase(nome));
 	}
+	
 	
 	@PostMapping()
 	public ResponseEntity<Produto> inserirProduto(@Valid @RequestBody Produto amostra) {
