@@ -10,4 +10,5 @@ import br.com.colaborart.ecommerce.model.Usuario;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 	public Optional<Usuario> findByEmail(String email);
+	
 }
